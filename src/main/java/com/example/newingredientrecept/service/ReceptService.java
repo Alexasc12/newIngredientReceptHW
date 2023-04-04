@@ -1,13 +1,16 @@
 package com.example.newingredientrecept.service;
 
 import com.example.newingredientrecept.dto.ReceptDTO;
+import com.example.newingredientrecept.model.Ingredient;
 import com.example.newingredientrecept.model.Recept;
 
 
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class ReceptService {
@@ -35,7 +38,34 @@ public class ReceptService {
             return  recept;
         }
         return null;
+    }
 
+    public List<Recept> getAllRecept() {
+        return   mapRecept.values().stream().collect(Collectors.toList());
+
+    }
+
+    public Recept editRecept(int id, Recept newRecept) {
+        Recept recept = mapRecept.get(id);
+        if (recept != null) {
+            recept.setNameDish(newRecept.getNameDish());
+            recept.setListSteps(newRecept.getListSteps());
+            return newRecept;
+        }
+
+        return null;
+    }
+
+    public boolean deleteRecept(int id) {
+        if (mapRecept.containsKey(id)) {
+            mapRecept.remove(id );
+            return true;
+        }
+        return false;
+    }
+
+    public void deleteAllRecept() {
+        mapRecept = new HashMap<>();
     }
 
 }
