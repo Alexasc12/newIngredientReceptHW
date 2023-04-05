@@ -1,9 +1,12 @@
 package com.example.newingredientrecept.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
-
+@Data
+@AllArgsConstructor
 public class Recept {
     //    Название в формате строки;
 //    Время приготовления в минутах в формате целого положительного числа;
@@ -16,42 +19,5 @@ public class Recept {
     private List<String> listSteps;
 
 
-    public Recept(String nameDish, int cookingTime, List<Ingredient> listIngridient, List<String> listSteps) {
-        this.nameDish = nameDish;
-        this.cookingTime = cookingTime;
-        this.listIngridient = listIngridient;
-        this.listSteps = listSteps;
-    }
 
-    public String getNameDish() {
-        return nameDish;
-    }
-
-    public void setNameDish(String nameDish) {
-        this.nameDish = nameDish;
-    }
-
-    public int getCookingTime() {
-        return cookingTime;
-    }
-
-    public void setCookingTime(int cookingTime) {
-        this.cookingTime = cookingTime;
-    }
-
-    public List<Ingredient> getListIngridient() {
-        return listIngridient;
-    }
-
-    public void setListIngridient(List<Ingredient> listIngridient) {
-        this.listIngridient = listIngridient;
-    }
-
-    public List<String> getListSteps() {
-        return listSteps;
-    }
-
-    public void setListSteps(List<String> listSteps) {
-        this.listSteps = listSteps;
-    }
 }
