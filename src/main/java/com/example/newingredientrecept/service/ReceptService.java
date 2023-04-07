@@ -1,12 +1,15 @@
 package com.example.newingredientrecept.service;
 
 import com.example.newingredientrecept.dto.ReceptDTO;
-import com.example.newingredientrecept.model.Ingredient;
 import com.example.newingredientrecept.model.Recept;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,20 +17,28 @@ import java.util.stream.Collectors;
 
 @Service
 public class ReceptService {
-//    1. Добавления нового рецепта.
-//    В метод передается заполненный объект класса рецепта,
-//    который сохраняется в карте и получает свой порядковый номер.
-//     2. Получение рецепта.
-//    В метод передается порядковый номер рецепта, на выходе мы получаем из карты нужный объект.
+
+    final private FileServiceRecept fileServiceRecept ;
+
 
     private int idCounter = 0;
 
     Map<Integer,Recept> mapRecept = new HashMap<>();
 
+    public ReceptService(FileServiceRecept fileServiceRecept) {
+        this.fileServiceRecept = fileServiceRecept;
+    }
+
+    @PostConstruct
+    private void init() {
+        readFrommFileRecept();
+    }
+
 
     public ReceptDTO postRecept( Recept recept) {
         int id = idCounter++;
         mapRecept.put(id,recept);
+        saveToFileRecept();
 
         return ReceptDTO.from(id,recept);
     }
@@ -50,6 +61,7 @@ public class ReceptService {
         if (recept != null) {
             recept.setNameDish(newRecept.getNameDish());
             recept.setListSteps(newRecept.getListSteps());
+            saveToFileRecept();
             return newRecept;
         }
 
@@ -67,5 +79,27 @@ public class ReceptService {
     public void deleteAllRecept() {
         mapRecept = new HashMap<>();
     }
+
+    private void saveToFileRecept(){
+        try {
+            String json = new ObjectMapper().writeValueAsString(mapRecept);
+            fileServiceRecept.saveToFileRecept(json);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
+    private void readFrommFileRecept(){
+        String json = fileServiceRecept.readFromFileRecept();
+        try {
+            mapRecept = new ObjectMapper().readValue(json, new TypeReference< Map < Integer, Recept>>(){
+            } );
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 }
