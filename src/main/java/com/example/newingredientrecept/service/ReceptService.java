@@ -71,6 +71,7 @@ public class ReceptService {
     public boolean deleteRecept(int id) {
         if (mapRecept.containsKey(id)) {
             mapRecept.remove(id );
+            saveToFileRecept();
             return true;
         }
         return false;

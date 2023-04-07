@@ -12,10 +12,10 @@ import java.nio.file.Path;
 @Service
 public class FileServiceRecept {
 
-    @Value("${path.to.data.file2}")
+    @Value("${path.to.data1.file}")
     private String dataFilePath2;
 
-    @Value("${name.of.data.file2}")
+    @Value("${name.of.data1.file}")
     private String dataFileName2;
 
 

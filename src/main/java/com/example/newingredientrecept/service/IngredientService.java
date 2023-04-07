@@ -82,6 +82,7 @@ public class IngredientService {
     public boolean deleteIngredient(int id) {
         if (mapIngridient.containsKey(id)) {
                 mapIngridient.remove(id );
+                saveToFile();
                 return true;
             }
         return false;
