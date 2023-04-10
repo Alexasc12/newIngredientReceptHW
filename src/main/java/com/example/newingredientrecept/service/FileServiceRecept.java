@@ -5,6 +5,7 @@ package com.example.newingredientrecept.service;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -30,16 +31,24 @@ public class FileServiceRecept {
         }
     }
 
+//    public String readFromFileRecept(){
+//
+//        try {
+//            return   Files.readString(Path.of(dataFilePath2, dataFileName2));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            throw new RuntimeException(e);
+//        }
+//    }
     public String readFromFileRecept(){
         try {
             return   Files.readString(Path.of(dataFilePath2, dataFileName2));
-
         } catch (IOException e) {
             e.printStackTrace();
-            throw new RuntimeException(e);
+            return "{}";
         }
-
     }
+
 
     private boolean cleanDataFileRecept() {
         try {
@@ -52,6 +61,12 @@ public class FileServiceRecept {
             return false;
         }
     }
+
+//    private Path createFile() {
+//    return     Files.createFile(Path.of(dataFilePath2 ));
+//
+//    }
+
 
 
 

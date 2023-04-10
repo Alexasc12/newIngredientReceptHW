@@ -3,6 +3,7 @@ package com.example.newingredientrecept.service;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -29,16 +30,24 @@ public class FilesService {
         }
     }
 
+//    public String readFromFile(){
+//        try {
+//            return   Files.readString(Path.of(dataFilePath, dataFileName));
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            throw new RuntimeException(e);
+//        }
+//    }
     public String readFromFile(){
         try {
             return   Files.readString(Path.of(dataFilePath, dataFileName));
-
         } catch (IOException e) {
             e.printStackTrace();
-            throw new RuntimeException(e);
+            return "{}";
         }
-
     }
+
 
     private boolean cleanDataFile() {
         try {
