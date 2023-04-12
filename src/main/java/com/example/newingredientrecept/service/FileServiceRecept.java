@@ -36,7 +36,7 @@ public class FileServiceRecept {
 
         } catch (IOException e) {
             e.printStackTrace();
-            throw new RuntimeException(e);
+            return "{}";
         }
 
     }
