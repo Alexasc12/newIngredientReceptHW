@@ -31,6 +31,12 @@ public class FilesController {
     @Value("${name.of.data.file}")
     private String dataFileName;
 
+    @Value("${path.to.data2.file}")
+    private String dataFilePath3;
+
+    @Value("${name.of.data2.file}")
+    private String dataFileName3;
+
     private final FilesService filesService;
     private final FileServiceRecept fileServiceRecept;
 
@@ -82,6 +88,23 @@ public class FilesController {
             response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
             response.setContentLength((int)Files.size(path));
             response.addHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename= ingredient"  );
+            is.transferTo(os);
+        }
+    }
+
+    @GetMapping(value = "/files/downloadReceptTXT")
+    public void downloadFile3(  HttpServletResponse response)
+            throws IOException {
+        Path path = Path.of(dataFilePath3,dataFileName3);
+
+        try (
+                InputStream is = Files.newInputStream(path);
+                OutputStream os = response.getOutputStream()
+        ) {
+            response.setStatus(200);
+            response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
+            response.setContentLength((int)Files.size(path));
+            response.addHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename= recept"  );
             is.transferTo(os);
         }
     }
