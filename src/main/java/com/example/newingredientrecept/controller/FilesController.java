@@ -22,6 +22,14 @@ public class FilesController {
 
     @Value( "${path.to.data1.file}")
     private String dataFilePath2;
+    @Value("${name.of.data1.file}")
+    private String dataFileName2;
+
+    @Value("${path.to.data.file}")
+    private String dataFilePath;
+
+    @Value("${name.of.data.file}")
+    private String dataFileName;
 
     private final FilesService filesService;
     private final FileServiceRecept fileServiceRecept;
@@ -45,22 +53,40 @@ public class FilesController {
     }
 
 
-    @GetMapping(value = "/files/{name}/download")
-    public void downloadFile(@PathVariable String name, HttpServletResponse response)
+    @GetMapping(value = "/files/downloadRecept")
+    public void downloadFile(  HttpServletResponse response)
             throws IOException {
-        Path path = Path.of(dataFilePath2 + "/" + name);
+        Path path = Path.of(dataFilePath2 , dataFileName2);
 
         try (
                 InputStream is = Files.newInputStream(path);
-                OutputStream os = response.getOutputStream();
+                OutputStream os = response.getOutputStream()
         ) {
             response.setStatus(200);
             response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
             response.setContentLength((int)Files.size(path));
-            response.addHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + name);
+            response.addHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename= recept"  );
             is.transferTo(os);
         }
     }
+    @GetMapping(value = "/files/downloadIngredient")
+    public void downloadFile2(  HttpServletResponse response)
+            throws IOException {
+        Path path = Path.of(dataFilePath , dataFileName);
+
+        try (
+                InputStream is = Files.newInputStream(path);
+                OutputStream os = response.getOutputStream()
+        ) {
+            response.setStatus(200);
+            response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
+            response.setContentLength((int)Files.size(path));
+            response.addHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename= ingredient"  );
+            is.transferTo(os);
+        }
+    }
+
+
 
 
 
