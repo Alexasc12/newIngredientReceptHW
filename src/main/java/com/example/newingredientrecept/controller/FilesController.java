@@ -119,12 +119,12 @@ public class FilesController {
         }
     }
 
-    @GetMapping("/download")
-    public ResponseEntity<Object> downloadJson() throws IOException {
-        List<Recept> data = receptService.getAllRecept();
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        String json = mapper.writeValueAsString(data);
+    @GetMapping("/download/{namber}")
+    public ResponseEntity<Object> getRecept(@PathVariable int namber) throws IOException {
+//        List<Recept> data = receptService.getAllRecept();
+//        ObjectMapper mapper = new ObjectMapper();
+//        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        String json =receptService.getStringRecept(namber);
         File file = File.createTempFile("data", ".json");
         try {
 
