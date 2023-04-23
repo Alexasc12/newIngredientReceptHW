@@ -1,6 +1,7 @@
 package com.example.newingredientrecept.service;
 
 import com.example.newingredientrecept.dto.ReceptDTO;
+import com.example.newingredientrecept.model.Ingredient;
 import com.example.newingredientrecept.model.Recept;
 
 
@@ -53,15 +54,16 @@ public class ReceptService {
 
     public String getStringRecept(int namber) {
       Recept recept =  mapRecept.get(namber);
-        StringBuilder builder = new StringBuilder(recept.getNameDish());
-        builder.append(recept.getCookingTime());
-        builder.append(recept.getListIngridient());
-        builder.append(recept.getListSteps());
-
-        String result = builder.toString();
-
-
-      return  result;
+      String ingredients = recept.getListIngridient().stream()
+              .map(Ingredient::getNameIngredients)
+              .collect(Collectors.joining(","));
+      String steps = String.join("\n", recept.getListSteps());
+      StringBuilder builder = new StringBuilder();
+      builder.append("Название вблюда: ").append(recept.getNameDish()).append("\n")
+              .append("Время приготовления:").append(recept.getCookingTime()).append(" минут\n")
+              .append("Ингредиенты: ").append(ingredients).append("\n")
+              .append("Инструкция приготовления: \n").append(steps).append("\n");
+      return builder.toString();
 
 
     }
