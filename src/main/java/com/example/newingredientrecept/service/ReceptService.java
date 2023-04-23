@@ -53,21 +53,15 @@ public class ReceptService {
 
     public String getStringRecept(int namber) {
       Recept recept =  mapRecept.get(namber);
-      String receptStr = recept.getNameDish() +"\n" +
-              recept.getCookingTime() + ": 30 минут.\n" +
-              recept.getListIngridient() + " :\n" +
-              "-Творог — 350 г.\n" +
-              "-Куриное яйцо — 2 шт.\n" +
-              "-Пшеничная мука — 6 ст.л.\n" +
-              "-Сахар — 2 ст.л.\n" +
-              recept.getListSteps() +":\n" +
-              "-Смешайте весь творог с яйцами, сахаром и тщательно всё перемешайте.\n" +
-              " Всыпьте в творог муку и тщательно перемешайте.\n" +
-              "-Поставьте сковороду на средний огонь и налейте в нее подсолнечное масло.\n" +
-              "-Слепите несколько небольших шариков из получившейся творожной массы и положите их на тарелку. Затем по очереди обкатывайте творожные шарики в муке и выкладывайте на сковороду.\n" +
-              "-Обжаривайте сырники 1–2 минуты до появления золотистой корочки. Затем переверните их на другую сторону и также обжарьте до золотистого состояния.\n" +
-              "-Повторяйте, пока творог не закончится.";
-      return  receptStr;
+        StringBuilder builder = new StringBuilder(recept.getNameDish());
+        builder.append(recept.getCookingTime());
+        builder.append(recept.getListIngridient());
+        builder.append(recept.getListSteps());
+
+        String result = builder.toString();
+
+
+      return  result;
 
 
     }
