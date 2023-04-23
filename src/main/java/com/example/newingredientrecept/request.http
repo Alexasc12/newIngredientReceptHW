@@ -1,0 +1,120 @@
+POST http://localhost:8080/recipe
+Content-Type: application/json
+
+{
+  "nameDish" : "test",
+  "cookingTime" : 30,
+  "listIngridient" :[
+    {
+      "nameIngredients": "testingr",
+      "weight": 1,
+      "measureUnit": "peace"
+    }
+  ],
+  "listSteps" : [
+    "Step 1",
+    "Step 2",
+    "Step 3"
+  ]
+
+}
+
+###
+GET http://localhost:8080/recipe/0
+
+###
+POST http://localhost:8080/recipe
+Content-Type: application/json
+
+{
+  "nameDish" : "test",
+  "cookingTime" : 32,
+  "listIngridient" :[
+    {
+      "nameIngredients": "testingr",
+      "weight": 2,
+      "measureUnit": "peace"
+    }
+  ],
+  "listSteps" : [
+    "Step 1",
+    "Step 2",
+    "Step 3"
+  ]
+
+}
+
+###
+GET http://localhost:8080/recipe/0
+
+###
+POST http://localhost:8080/ingredient
+Content-Type: application/json
+
+
+
+
+{
+  "nameIngredients": "testingr",
+  "weight": 2,
+  "measureUnit": "peace"
+}
+
+
+
+
+###
+GET http://localhost:8080/ingredient/1
+
+###
+POST http://localhost:8080/ingredient
+Content-Type: application/json
+
+
+
+
+{
+  "nameIngredients": "testingr",
+  "weight": 2,
+  "measureUnit": "peace"
+}
+
+###
+POST http://localhost:8080/ingredient
+Content-Type: application/json
+
+
+
+
+{
+  "nameIngredients": "testingr",
+  "weight": 2,
+  "measureUnit": "peace"
+}
+
+###
+GET http://localhost:8080/ingredient/1
+POST http://localhost:8080/ingredient
+Content-Type: application/json
+
+{
+  "nameIngredients": "testingr",
+  "weight": 22,
+  "measureUnit": "peace"
+}
+
+###
+GET http://localhost:8080/ingredient/1
+
+###
+POST http://localhost:8080/ingredient
+Content-Type: application/json
+
+{
+  "nameIngredients": "testingr",
+  "weight": 23,
+  "measureUnit": "peace"
+}
+
+###
+GET http://localhost:8080/ingredient/2
